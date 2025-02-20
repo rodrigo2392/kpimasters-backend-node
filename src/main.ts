@@ -3,7 +3,8 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
-import basicAuth from 'express-basic-auth';
+
+import * as basicAuth from 'express-basic-auth';
 
 const logger = new Logger('APP', { timestamp: true });
 
