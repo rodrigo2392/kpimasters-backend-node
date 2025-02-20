@@ -7,7 +7,7 @@ export class RegisterAuthDto {
   email: string;
 
   @IsNotEmpty({ message: 'Debes ingresar una contraseña' })
-  @IsString()
+  @IsString({ message: 'La contraseña debe ser de tipo texto' })
   password: string;
 
   @IsNotEmpty()

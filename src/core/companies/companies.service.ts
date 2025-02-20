@@ -5,17 +5,26 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Company } from 'src/schemas/company.schema';
 import { Model } from 'mongoose';
 import { AuthService } from '../auth/auth.service';
+import Stripe from 'stripe';
 
 @Injectable()
 export class CompaniesService {
   constructor(
     @InjectModel(Company.name) private companyModel: Model<Company>,
-    @InjectModel(Company.name) private userModel: Model<Company>,
     private readonly authService: AuthService,
   ) {}
   async create(createCompanyDto: CreateCompanyDto) {
+    const stripe = new Stripe(process.env.STRIPE_KEY ?? '');
+    const stripe_user = await stripe.customers.create({
+      name: createCompanyDto.name,
+      email: createCompanyDto.email,
+      address: {
+        line1: createCompanyDto.address,
+      },
+      phone: createCompanyDto.phone,
+    });
+    createCompanyDto.stripe_customer = stripe_user.id;
     const createdCompany = new this.companyModel(createCompanyDto);
-
     const newUser = createCompanyDto.user;
     newUser.company = createdCompany._id;
 

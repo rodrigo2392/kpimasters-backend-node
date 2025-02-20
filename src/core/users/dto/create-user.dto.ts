@@ -25,17 +25,21 @@ export class CreateUserDto {
   @IsString()
   cognito_id?: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Debes ingresar el nombre' })
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Debes ingresar los apellidos' })
   @IsString()
   last_name: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Debes ingresar un email' })
   @IsString()
   email: string;
+
+  @IsNotEmpty({ message: 'Debes ingresar una contraseña' })
+  @IsString()
+  password: string;
 
   @IsNotEmpty()
   @IsString()

@@ -28,13 +28,13 @@ export class Company {
   @Prop()
   rfc: string;
 
-  @Prop()
+  @Prop({ default: null })
   distributor_id: string;
 
-  @Prop()
+  @Prop({ default: null })
   stripe_customer: string;
 
-  @Prop()
+  @Prop({ default: null })
   striper_suscription: string;
 
   @Prop()

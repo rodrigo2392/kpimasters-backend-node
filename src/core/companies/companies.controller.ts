@@ -17,6 +17,8 @@ export class CompaniesController {
 
   @Post()
   create(@Body() createCompanyDto: CreateCompanyDto) {
+    createCompanyDto.user.role = 1;
+    createCompanyDto.user.permission_level = 8;
     return this.companiesService.create(createCompanyDto);
   }
 

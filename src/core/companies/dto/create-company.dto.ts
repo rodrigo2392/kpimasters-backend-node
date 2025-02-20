@@ -29,7 +29,7 @@ export class CreateCompanyDto {
   @IsString()
   rfc?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   distributor_id: string;
 

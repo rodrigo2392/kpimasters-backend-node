@@ -8,6 +8,7 @@ import { CompaniesModule } from './core/companies/companies.module';
 import { UsersModule } from './core/users/users.module';
 import { AuthModule } from './core/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { PaymentsModule } from './core/payments/payments.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ConfigModule } from '@nestjs/config';
         tokenUse: 'id',
       },
     }),
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
