@@ -13,11 +13,7 @@ import { PaymentsModule } from './core/payments/payments.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGO_URL ?? '', {
-      dbName: process.env.MONGO_DB ?? '',
-      user: process.env.MONG_USER ?? '',
-      pass: process.env.MONG_PASS ?? '',
-    }),
+    MongooseModule.forRoot(process.env.MONGO_URL ?? ''),
     DemosModule,
     CompaniesModule,
     UsersModule,

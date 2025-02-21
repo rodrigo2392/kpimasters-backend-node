@@ -14,6 +14,8 @@ export class CompaniesService {
     private readonly authService: AuthService,
   ) {}
   async create(createCompanyDto: CreateCompanyDto) {
+    const createdCompany = new this.companyModel(createCompanyDto);
+    await createdCompany.save();
     const stripe = new Stripe(process.env.STRIPE_KEY ?? '');
     const stripe_user = await stripe.customers.create({
       name: createCompanyDto.name,
@@ -24,17 +26,15 @@ export class CompaniesService {
       phone: createCompanyDto.phone,
     });
     createCompanyDto.stripe_customer = stripe_user.id;
-    const createdCompany = new this.companyModel(createCompanyDto);
+
     const newUser = createCompanyDto.user;
     newUser.company = createdCompany._id;
 
-    await this.authService.register({
+    return this.authService.register({
       email: newUser.email,
       password: newUser.password,
       user: newUser,
     });
-
-    return createdCompany.save();
   }
 
   findAll() {
