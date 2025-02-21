@@ -14,6 +14,7 @@ import { PaymentsModule } from './core/payments/payments.module';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URL ?? '', {
+      dbName: process.env.MONGO_DB ?? '',
       auth: {
         username: process.env.MONG_USER ?? '',
         password: process.env.MONG_PASS ?? '',
